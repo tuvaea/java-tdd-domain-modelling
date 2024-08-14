@@ -4,22 +4,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Basket {
-    HashMap<String, Integer> items;
-
-    public Basket(){
-        this.items = new HashMap<>();
-        this.items.put("Something", 20);
-        this.items.put("Some2", 30);
-    }
+    HashMap<String, Integer> items = new HashMap<>();
 
     public Boolean add(String product, int price){
-        return !items.containsKey(product);
+        if (!items.isEmpty() && items.containsKey(product)){
+            return false;
+        } else {
+            items.put(product, price);
+            return true;
+        }
     }
 
     public Integer total(){
         int total = 0;
-        for (Map.Entry<String, Integer> set : items.entrySet()){
-            total+=set.getValue();
+        if (items.isEmpty()){
+            return 0;
+        }else {
+            for (Map.Entry<String, Integer> set : items.entrySet()){
+                total+=set.getValue();
+            }
         }
         return total;
     }

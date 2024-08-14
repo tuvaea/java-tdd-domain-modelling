@@ -7,25 +7,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BasketTest {
-    HashMap<String, Integer> items;
 
-    public BasketTest(){
-        this.items = new HashMap<>();
-        this.items.put("Something", 20);
-        this.items.put("Some2", 30);
-    }
 
     @Test
     public void testItemInBasket(){
         Basket basket = new Basket();
         Assertions.assertTrue(basket.add("new", 40));
-        Assertions.assertFalse(basket.add("Some2", 30));
+        Assertions.assertFalse(basket.add("new", 30));
     }
 
     @Test
     public void testTotal(){
         Basket basket = new Basket();
-        int total=basket.total();
-        Assertions.assertEquals(50, total);
+        Assertions.assertEquals(0, basket.total());
+
+        basket.add("new", 30);
+        basket.add("new2", 30);
+        Assertions.assertEquals(60, basket.total());
     }
 }
